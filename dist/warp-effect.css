@@ -1,0 +1,22 @@
+/* Warp effect overlay for planet switching */
+#wave-warp-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0,255,255,0.2) 0%, rgba(0,0,0,0.9) 100%);
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(.4,2,.6,1);
+}
+#wave-warp-overlay.active {
+  opacity: 1;
+  animation: warp-zoom 0.7s cubic-bezier(.4,2,.6,1) forwards;
+}
+@keyframes warp-zoom {
+  0%   { opacity: 0; transform: scale(1); filter: blur(0px); }
+  40%  { opacity: 1; transform: scale(1.15); filter: blur(2px); }
+  60%  { opacity: 1; transform: scale(1.35); filter: blur(4px); }
+  100% { opacity: 0; transform: scale(1.7); filter: blur(12px); }
+}

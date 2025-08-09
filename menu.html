@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Sentient Planet Discovery - Main Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #22d3ee;
+            --glow-color: rgba(34, 211, 238, 0.5);
+            --glow-color-strong: rgba(34, 211, 238, 0.7);
+            --modal-bg: rgba(0, 0, 0, 0.95);
+        }
+        
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--neon-cyan);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #main-menu {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        /* Animated Background */
+        #main-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(147, 51, 234, 0.08) 0%, transparent 50%);
+            animation: backgroundPulse 8s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        /* Moving stars background */
+        #main-menu::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(0, 255, 153, 0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(34, 211, 238, 0.5), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(147, 51, 234, 0.3), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: starsMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        /* Geometric overlay */
+        .geometric-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(45deg, transparent 49%, rgba(34, 211, 238, 0.03) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 255, 153, 0.02) 50%, transparent 51%);
+            background-size: 60px 60px;
+            z-index: -1;
+            animation: geometricShift 15s ease-in-out infinite;
+        }
+
+        .menu-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .title {
+            font-size: clamp(2rem, 8vw, 5rem);
+            margin-bottom: 3rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--glow-color-strong);
+            letter-spacing: 2px;
+        }
+
+        .menu-button {
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 15px 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .menu-button:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background-color: var(--glow-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .menu-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        @keyframes starsMove {
+            from { transform: translateX(0) translateY(0); }
+            to { transform: translateX(-200px) translateY(-100px); }
+        }
+
+        @keyframes geometricShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-30px); }
+        }
+
+        /* Settings Modal Styles */
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-bg);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .settings-modal.active {
+            display: flex;
+        }
+
+        .settings-container {
+            width: 90%;
+            max-width: 1200px;
+            height: 80%;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 8px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .settings-sidebar {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            border-right: 2px solid var(--neon-cyan);
+            padding: 20px 0;
+        }
+
+        .settings-header {
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .settings-title {
+            font-size: 1.8rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--glow-color);
+            margin: 0;
+        }
+
+        .settings-category {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .settings-category:hover {
+            background: rgba(34, 211, 238, 0.1);
+            border-left-color: var(--neon-cyan);
+        }
+
+        .settings-category.active {
+            background: rgba(34, 211, 238, 0.2);
+            border-left-color: var(--neon-cyan);
+            box-shadow: inset 0 0 10px var(--glow-color);
+        }
+
+        .settings-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .settings-panel {
+            display: none;
+        }
+
+        .settings-panel.active {
+            display: block;
+        }
+
+        .settings-panel h2 {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .settings-panel p {
+            color: rgba(34, 211, 238, 0.8);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .close-settings {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-settings:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="main-menu">
+        <div class="geometric-overlay"></div>
+        <div class="menu-content">
+            <h1 class="title">Advanced Sentient<br>Planet Discovery</h1>
+            <a href="index.html" class="menu-button">Play</a><br>
+            <button class="menu-button" onclick="openSettings()">Settings</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="settings-modal">
+        <div class="settings-container">
+            <button class="close-settings" onclick="closeSettings()">&times;</button>
+            
+            <!-- Left Sidebar -->
+            <div class="settings-sidebar">
+                <div class="settings-header">
+                    <h2 class="settings-title">Settings</h2>
+                </div>
+                <button class="settings-category active" onclick="showSettingsPanel('graphics')">Graphics</button>
+            </div>
+            
+            <!-- Right Content Panel -->
+            <div class="settings-content">
+                <div id="graphics-panel" class="settings-panel active">
+                    <h2>Graphics Settings</h2>
+                    <p>Graphics settings will be added here in the future.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openSettings() {
+            document.getElementById('settings-modal').classList.add('active');
+        }
+
+        function closeSettings() {
+            document.getElementById('settings-modal').classList.remove('active');
+        }
+
+        function showSettingsPanel(panelName) {
+            // Remove active class from all categories and panels
+            document.querySelectorAll('.settings-category').forEach(cat => cat.classList.remove('active'));
+            document.querySelectorAll('.settings-panel').forEach(panel => panel.classList.remove('active'));
+            
+            // Add active class to clicked category and corresponding panel
+            event.target.classList.add('active');
+            document.getElementById(panelName + '-panel').classList.add('active');
+        }
+
+        // Close settings when clicking outside the container
+        document.getElementById('settings-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSettings();
+            }
+        });
+
+        // Close settings with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSettings();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    margin: 0px;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#brandTag
+{
+	position: fixed;
+	display: block;
+	top: 0px;
+	left: 30px;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 1000;
+	text-align: center;
+	padding: 12px 12px 12px 12px;
+	font-size: 18px;
+	font-family: "Helvetica", sans-serif;
+	transition-property: color, background-color, padding;
+	transition-duration: 0.3s;
+}
+@media (width < 600px) {
+
+}
+
+@media screen and (max-width: 600px) {
+  #brandTag
+  {
+  	display: none;
+  }
+  #infoBoxHolder
+  {
+  	display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #infoBoxHolderMobile {
+    display: none;
+  }
+  #newPlanetButtonHolder {
+    display: none;
+  }
+}
+
+#brandTag:hover
+{
+	color: black;
+	background-color: white;
+	padding: 24px 12px 12px 12px;
+}
+
+#infoBoxHolder {
+  position: absolute;
+  z-index: 1000;
+  top: 0px;
+  right: 20px;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 245px;
+}
+
+#infoBox {
+  padding: 12px 12px 12px 12px;
+  font-size: 14px;
+	font-family: "Helvetica-Light", sans-serif;
+  line-height: 18px;
+}
+
+#planetName {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+#instructions {
+  font-size: 10px;
+}
+
+#infoBoxHolderMobile {
+  position: absolute;
+  z-index: 1000;
+  top: 0px;
+  width: 100%;
+
+}
+
+#infoBoxMobile {
+
+  margin: 0 auto;
+
+  width: 245px;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 12px 12px 12px 12px;
+  font-size: 14px;
+	font-family: "Helvetica-Light", sans-serif;
+  line-height: 18px;
+  text-align: center;
+}
+
+#planetNameMobile {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+
+#newPlanetButtonHolder {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0px;
+  width: 100%;
+}
+
+#newPlanetButton {
+  margin: 0 auto;
+
+  width: 145px;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 12px 12px 12px 12px;
+  font-size: 18px;
+  font-family: "Helvetica-Light", sans-serif;
+  line-height: 18px;
+  text-align: center;
+}
+
+#line {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 1px;
+}
+
+
+#biomeCanvas {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0px;
+  right: 0px;
+}
+
+#nebulaeCanvas {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0px;
+  left: 0px;
+}
+
+#sunCanvas {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0px;
+  right: 0px;
+}
+
+/* Position the button VR on the bottom of the page. */
+#ui {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Karla', sans-serif;
+    z-index: 1;
+}
+
+a#magic-window {
+    display: block;
+    color: white;
+    margin-top: 1em;
+}
+
+#loadingBarHolder {
+  position: absolute;
+
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+
+  width: 245px;
+  height: 100px;
+
+  text-align: center;
+  font-size: 18px;
+  font-family: "Helvetica-Light", sans-serif;
+
+  /* border: 1px solid #222222; */
+  padding: 20px;
+  padding-top: 30px;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+}
+
+#loadingBarBase {
+  width: 100%;
+  height: 50%;
+  margin-top: 10px;
+  background-color: #333333;
+}
+
+#loadingBar {
+  width: 50%;
+  height: 100%;
+  background-color: #777777;
+}
+
+/* Relaxing font and color for alien chatbox */
+#alien-chat-box, #alien-chat-box * {
+  font-family: 'Segoe UI', 'Roboto', 'Nunito', Arial, sans-serif;
+  font-size: 1.08em;
+  color: #d2e6e7;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+#alien-chat-messages {
+  background: rgba(20,30,40,0.72);
+  border-radius: 10px;
+  padding: 12px 10px 8px 10px;
+  /* Allow the container to grow and let only vertical scroll occur */
+  max-height: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#alien-chat-input, #alien-chat-send {
+  font-family: inherit;
+  font-size: 1em;
+  color: #d2e6e7;
+  background: #232e36;
+  border: 1px solid #3a4a55;
+  border-radius: 6px;
+  padding: 7px 10px;
+}
+#alien-chat-input:focus {
+  outline: 2px solid #00ffe7;
+  background: #26323a;
+}
+#alien-chat-send:hover {
+  background: #2b3a45;
+  color: #fff;
+}
+
+/* --- FORCE next-planet-btn TOP RIGHT --- */
+.next-planet-btn {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+    float: none !important;
+    padding: 12px 24px !important;
+    background: transparent !important;
+    border: 2px solid var(--neon-cyan) !important;
+    color: var(--neon-cyan) !important;
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 1.1rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    z-index: 1000 !important;
+    border-radius: 4px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    backdrop-filter: blur(5px) !important;
+    min-width: 200px !important;
+}
+@media only screen and (max-width: 800px) and (pointer: coarse) and (hover: none) {
+  .next-planet-btn {
+    padding: 6px 12px !important;
+    font-size: 0.85rem !important;
+    min-width: 120px !important;
+  }
+}

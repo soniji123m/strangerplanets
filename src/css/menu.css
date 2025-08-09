@@ -1,0 +1,123 @@
+:root {
+    --neon-cyan: #22d3ee;
+    --glow-color: rgba(34, 211, 238, 0.5);
+    --glow-color-strong: rgba(34, 211, 238, 0.7);
+}
+
+#main-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    color: var(--neon-cyan);
+    text-align: center;
+    transition: opacity 0.5s ease;
+    overflow: hidden;
+}
+
+/* Geometric overlay */
+.geometric-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(45deg, transparent 49%, rgba(34, 211, 238, 0.03) 50%, transparent 51%),
+        linear-gradient(-45deg, transparent 49%, rgba(0, 255, 153, 0.02) 50%, transparent 51%);
+    background-size: 60px 60px;
+    z-index: -1;
+    animation: geometricShift 15s ease-in-out infinite;
+}
+
+#main-menu.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    z-index: 10;
+    position: relative;
+}
+
+.title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--glow-color-strong);
+    margin-bottom: 2rem;
+}
+
+.menu-button {
+    background: transparent;
+    border: 2px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 12px 30px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.menu-button:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.menu-button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background-color: var(--glow-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.menu-button:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes geometricShift {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(30px) translateY(-30px); }
+}
+
+/* Loading Bar */
+.loading-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 4px;
+    background: rgba(34, 211, 238, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    background: var(--neon-cyan);
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--glow-color);
+}
